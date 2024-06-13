@@ -2,7 +2,6 @@ package brendansStarfield;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.ArcType;
 
 public class UFO extends NightObject {
 
@@ -42,20 +41,28 @@ public class UFO extends NightObject {
         }
     }
 
-    public void fly(double amount, int step) {
+    public void fly(double amount) {
         double xPos = getX();
         double yPos = getY();
-        int direction = step % 4;
-        if (direction == 0 || direction == 2) {
-            yPos = yPos - amount;
-        } else {
-            if (direction == 1) {
-                xPos = xPos + amount;
-            } else {
-                xPos = xPos - amount;
-            }
-        }
-        setY(yPos);
+        xPos = xPos - amount;
+        yPos = yPos - amount / 2;
         setX(xPos);
+        setY(yPos);
+    }
+
+    public void flyLeft(double amount) {
+        double xPos = getX();
+        double yPos = getY();
+        double displayHeight = 1000;
+
+        xPos = xPos + amount;
+
+        if (yPos < displayHeight - height) {
+            yPos = yPos + amount / 2;
+        } else {
+            yPos = yPos - amount / 2;
+        }
+        setX(xPos);
+        setY(yPos);
     }
 }
